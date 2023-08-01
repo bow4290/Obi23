@@ -1,8 +1,5 @@
 # Obi23
 Reworked Obi Wheel Kenobi code.
 
-# Test Area (Don't mind this it will be gone soon)
-Hi.
-
-# Test Area 2
-Hello
+# Important Links
+[Obi23 Planning Document](https://docs.google.com/document/d/1TCYSNcAvgIyayosmnDst6Y8Cpz7xOwil6iTlreU9qYQ/edit?usp=sharing)
