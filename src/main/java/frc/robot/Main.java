@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.RobotBase;
  * call.
  */
 public final class Main {
-  public static String imposter = "me";
   private Main() {}
 
   /**
