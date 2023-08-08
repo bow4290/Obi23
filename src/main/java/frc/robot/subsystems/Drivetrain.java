@@ -40,7 +40,7 @@ public class Drivetrain extends SubsystemBase {
     differentialDrive = new DifferentialDrive(leftDriveGroup, rightDriveGroup);
   }
   public void drive(double move, double rotation){
-    // differentialDrive
+    differentialDrive.arcadeDrive(move, rotation);
   }
 
   @Override
