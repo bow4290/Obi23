@@ -20,7 +20,7 @@ public class GenericGamepad {
 
   // Also known as L1 on PS4
   public Trigger leftBumper;
-  // Also known as
+  // Also known as R1 on PS4
   public Trigger rightBumper;
 
   public Trigger dpadUp;
@@ -61,6 +61,7 @@ public class GenericGamepad {
       return new GenericGamepad(new CommandXboxController(port));
     }
   }
+
   public GenericGamepad(CommandPS4Controller controller) {
     cross_a = controller.cross();
     circle_b = controller.circle();
