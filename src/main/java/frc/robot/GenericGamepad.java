@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -52,14 +53,14 @@ public class GenericGamepad {
 
   public DoubleConsumer rumble;
 
-  public static GenericGamepad from(int port, boolean isPS4) {
-    if (isPS4) {
+  public static GenericGamepad from(int port) {
+    // If not Xbox controller, set to PS4, otherwise use Xbox controller.
+    if (!DriverStation.getJoystickIsXbox(port)){
       return new GenericGamepad(new CommandPS4Controller(port));
-    } else {
+    }else {
       return new GenericGamepad(new CommandXboxController(port));
     }
   }
-
   public GenericGamepad(CommandPS4Controller controller) {
     cross_a = controller.cross();
     circle_b = controller.circle();
