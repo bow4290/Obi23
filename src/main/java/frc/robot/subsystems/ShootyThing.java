@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShootyThing extends SubsystemBase {
-    public double shooterSpeedDefault = 0.90;
+    public final double shooterSpeedDefault = 0.90;
     public final static int idLeftShooter = 1;
     public final static int idRightShooter = 8;
 
