@@ -55,9 +55,9 @@ public class GenericGamepad {
 
   public static GenericGamepad from(int port) {
     // If not Xbox controller, set to PS4, otherwise use Xbox controller.
-    if (!DriverStation.getJoystickIsXbox(port)){
+    if (!DriverStation.getJoystickIsXbox(port)) {
       return new GenericGamepad(new CommandPS4Controller(port));
-    }else {
+    } else {
       return new GenericGamepad(new CommandXboxController(port));
     }
   }
