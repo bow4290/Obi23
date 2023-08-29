@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.Drivetrain;
 
 /**
@@ -15,6 +16,7 @@ import frc.robot.subsystems.Drivetrain;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  public final Conveyor conveyor = new Conveyor();
   public final Drivetrain drivetrain = new Drivetrain();
   public final GenericGamepad controller = GenericGamepad.from(0);
 

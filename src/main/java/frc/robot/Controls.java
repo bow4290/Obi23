@@ -8,5 +8,7 @@ public class Controls {
             () ->
                 bot.drivetrain.drive(
                     -bot.controller.leftY.getAsDouble(), bot.controller.leftX.getAsDouble())));
+    bot.controller.cross_a.whileTrue(bot.conveyor.conveyBallForward());
+    bot.controller.circle_b.whileTrue(bot.conveyor.conveyBallBackward());
   }
 }
