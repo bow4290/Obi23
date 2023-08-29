@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.ShootyThing;
 
 /**
@@ -18,6 +19,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public final Drivetrain drivetrain = new Drivetrain();
   public final ShootyThing shooter = new ShootyThing();
+  public final Intake intake = new Intake();
   public final GenericGamepad controller = GenericGamepad.from(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
