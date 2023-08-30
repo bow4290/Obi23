@@ -13,11 +13,7 @@ public class Intake extends SubsystemBase {
     intake.setInverted(false);
   }
 
-  public void setIntakePower(double power) {
-    intake.set(power);
-  }
-
   public CommandBase runIntake(double power) {
-    return runEnd(() -> setIntakePower(power), () -> setIntakePower(0));
+    return runEnd(() -> intake.set(power), () -> intake.set(0));
   }
 }
