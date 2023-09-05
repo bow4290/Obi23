@@ -14,8 +14,10 @@ public class Controls {
                     -bot.controller.leftY.getAsDouble(), bot.controller.leftX.getAsDouble())));
     bot.controller.cross_a.whileTrue(bot.conveyor.conveyBallForward());
     bot.controller.circle_b.whileTrue(bot.conveyor.conveyBallBackward());
-     bot.controller.triangle_y.onTrue(Commands.runOnce(() -> {
-      rawTriggerPower = bot.controller.leftTrigger.getAsDouble();
-     }));
+    bot.controller.triangle_y.onTrue(
+        Commands.runOnce(
+            () -> {
+              rawTriggerPower = bot.controller.leftTrigger.getAsDouble();
+            }));
   }
 }
