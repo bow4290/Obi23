@@ -17,7 +17,7 @@ public class Controls {
     POWER_1 {
       @Override // Used to remove any errors from decreasing past lowest value
       PowerLevel decrease() {
-        return null;
+        return this;
       }
     },
     POWER_2,
@@ -25,7 +25,7 @@ public class Controls {
     POWER_4 {
       @Override // Used to remove any errors from increasing past highest value
       PowerLevel increase() {
-        return null;
+        return this;
       }
     };
 
@@ -45,26 +45,21 @@ public class Controls {
     double p3 = 0.85;
     double p4 = 0.95;
 
-    switch (level){
-      case POWER_1:
-        return p1;
-      case POWER_2:
-        return p2;
-      case POWER_3:
-        return p3;
-      case POWER_4:
-        return p4;
-    }
-    return p4; // I suppose in the case the switch somehow falls through?
+    return switch (level){
+      case POWER_1 -> p1;
+      case POWER_2 -> p2;
+      case POWER_3 -> p3;
+      case POWER_4 -> p4;
+    };
   }
 
   // Uses PowerLevel methods along with getPowerLevelPercentage to change currentLevel and currentLevelPercentage
   private static void incrementPowerLevel() {
-    currentLevel.increase();
+    currentLevel = currentLevel.increase();
     currentLevelPercentage = getPowerLevelPercentage(currentLevel);
   }
   private static void decrementPowerLevel() {
-    currentLevel.decrease();
+    currentLevel = currentLevel.decrease();
     currentLevelPercentage = getPowerLevelPercentage(currentLevel);
   }
   private static void resetPowerLevel(){
