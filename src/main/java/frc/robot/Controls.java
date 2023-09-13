@@ -1,7 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Commands;
-
 public class Controls {
   // -- Control Scheme --
   // Left Stick Movement - 'Arcade' Drive
@@ -93,6 +92,10 @@ public class Controls {
       resetPowerLevel();
     }));
 
-    bot.controller.rightTriggerB.onTrue(bot.shooter.shoot(currentLevelPercentage));
+    // Run in parallel so shooter flywheels have time to get to full speed
+    bot.controller.rightTriggerB.onTrue(Commands.parallel(
+      bot.shooter.shoot(currentLevelPercentage),
+      bot.conveyor.conveyBallForward().beforeStarting(Commands.waitSeconds(1))
+    ));
   }
 }
