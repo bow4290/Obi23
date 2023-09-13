@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.subsystems.Intake;
 public class Controls {
   // -- Control Scheme --
   // Left Stick Movement - 'Arcade' Drive
@@ -93,9 +94,11 @@ public class Controls {
     }));
 
     // Run in parallel so shooter flywheels have time to get to full speed
-    bot.controller.rightTriggerB.onTrue(Commands.parallel(
+    bot.controller.rightTriggerB.whileTrue(Commands.parallel(
       bot.shooter.shoot(currentLevelPercentage),
       bot.conveyor.conveyBallForward().beforeStarting(Commands.waitSeconds(1))
     ));
+
+    bot.controller.square_x.whileTrue(bot.intake.runIntake(Intake.intakePower));
   }
 }
