@@ -5,13 +5,17 @@ import frc.robot.subsystems.Intake;
 public class Controls {
   // -- Control Scheme --
   // Left Stick Movement - 'Arcade' Drive
+  // □ / X - Intake
   // ⨉ / A - Conveyor Forward / Up
   // ○ / B - Conveyor Back / Down
   // Dpad ↑ / ↓ - Increase / Decrease Shooter Power
   // △ / Y - Reset Shooter Power
+  // R2 / Right Trigger - Shoot (Spisn flywheels + move up conveyor)  
 
-  // -- Constants --
-  private static final PowerLevel defaultPowerLevel = PowerLevel.POWER_4;
+  private static final PowerLevel DEFAULT_POWER_LEVEL = PowerLevel.POWER_4;
+
+  private static PowerLevel currentLevel = DEFAULT_POWER_LEVEL;
+  private static double currentLevelPercentage = getPowerLevelPercentage(currentLevel);
 
   private enum PowerLevel {
     POWER_1 {
@@ -63,16 +67,14 @@ public class Controls {
     currentLevelPercentage = getPowerLevelPercentage(currentLevel);
   }
   private static void resetPowerLevel(){
-    currentLevel = defaultPowerLevel;
+    currentLevel = DEFAULT_POWER_LEVEL;
     currentLevelPercentage = getPowerLevelPercentage(currentLevel);
   }
-
-  private static PowerLevel currentLevel = defaultPowerLevel;
-  private static double currentLevelPercentage = getPowerLevelPercentage(currentLevel);
 
   // Main Function (essentially)
   public static void controlConfig(RobotContainer bot) {
 
+    // Drive
     bot.drivetrain.setDefaultCommand(
       bot.drivetrain.run(
         // CONTROL: Drive - Left Joystick (Y Inverted required)
@@ -80,9 +82,11 @@ public class Controls {
           bot.drivetrain.drive(
             -bot.controller.leftY.getAsDouble(), bot.controller.leftX.getAsDouble())));
 
+    // Conveyor
     bot.controller.cross_a.whileTrue(bot.conveyor.conveyBallForward());
     bot.controller.circle_b.whileTrue(bot.conveyor.conveyBallBackward());
 
+    // Power Levels
     bot.controller.dpadUp.onTrue(Commands.runOnce(() -> {
       incrementPowerLevel();
     }));
@@ -93,12 +97,13 @@ public class Controls {
       resetPowerLevel();
     }));
 
-    // Run in parallel so shooter flywheels have time to get to full speed
-    bot.controller.rightTriggerB.whileTrue(Commands.parallel(
+    // Shoot
+    bot.controller.rightTriggerB.whileTrue(Commands.parallel( // Run in parallel so shooter flywheels have time to get to full speed
       bot.shooter.shoot(currentLevelPercentage),
       bot.conveyor.conveyBallForward().beforeStarting(Commands.waitSeconds(1))
     ));
 
-    bot.controller.square_x.whileTrue(bot.intake.runIntake(Intake.intakePower));
+    // Intake
+    bot.controller.square_x.whileTrue(bot.intake.runIntake(Intake.INTAKE_POWER));
   }
 }

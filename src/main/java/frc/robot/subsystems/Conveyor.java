@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class Conveyor extends SubsystemBase {
-  public static final int idTop = 9;
-  public static final int idBottom = 7;
-  public static final double powerForward = 1;
-  public static final double powerBackward = -0.25;
+  public static final int ID_TOP = 9;
+  public static final int ID_BOTTOM = 7;
+  public static final double POWER_FORWARD = 1;
+  public static final double POWER_BACKWARD = -0.25;
 
-  private final WPI_VictorSPX topMotor = new WPI_VictorSPX(idTop);
-  private final WPI_VictorSPX bottomMotor = new WPI_VictorSPX(idBottom);
+  private final WPI_VictorSPX topMotor = new WPI_VictorSPX(ID_TOP);
+  private final WPI_VictorSPX bottomMotor = new WPI_VictorSPX(ID_BOTTOM);
   private DigitalInput button1 = new DigitalInput(6);
   private DigitalInput button2 = new DigitalInput(7);
   Trigger triggers = new Trigger(button2::get).negate().or(new Trigger(button1::get).negate());
@@ -33,10 +33,10 @@ public class Conveyor extends SubsystemBase {
   }
 
   public CommandBase conveyBallForward() {
-    return conveyBall(powerForward);
+    return conveyBall(POWER_FORWARD);
   }
 
   public CommandBase conveyBallBackward() {
-    return conveyBall(powerBackward);
+    return conveyBall(POWER_BACKWARD);
   }
 }

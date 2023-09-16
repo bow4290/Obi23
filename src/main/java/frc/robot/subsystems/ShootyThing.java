@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShootyThing extends SubsystemBase {
-  public static final int idLeftShooter = 1;
-  public static final int idRightShooter = 8;
+  public static final int ID_LEFT_SHOOTER = 1;
+  public static final int ID_RIGHT_SHOOTER = 8;
 
-  private final WPI_VictorSPX leftShooterMotor = new WPI_VictorSPX(idLeftShooter);
-  private final WPI_VictorSPX rightShooterMotor = new WPI_VictorSPX(idRightShooter);
+  private final WPI_VictorSPX leftShooterMotor = new WPI_VictorSPX(ID_LEFT_SHOOTER);
+  private final WPI_VictorSPX rightShooterMotor = new WPI_VictorSPX(ID_RIGHT_SHOOTER);
 
   public ShootyThing() {
     leftShooterMotor.setInverted(true);
