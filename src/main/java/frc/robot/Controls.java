@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.Intake;
 public class Controls {
@@ -105,5 +106,10 @@ public class Controls {
 
     // Intake
     bot.controller.square_x.whileTrue(bot.intake.runIntake(Intake.INTAKE_POWER));
+  }
+
+  public static void periodic(){
+    SmartDashboard.putNumber("Target Shooter Power %", currentLevelPercentage);
+    SmartDashboard.putString("Shooter Level", currentLevel.toString());
   }
 }
