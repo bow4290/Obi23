@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,5 +18,10 @@ public class Intake extends SubsystemBase {
 
   public CommandBase runIntake(double power) {
     return runEnd(() -> intake.set(power), () -> intake.set(0));
+  }
+
+  @Override
+  public void periodic(){
+    SmartDashboard.putNumber("Current Intake Motor Percent", intake.getMotorOutputPercent());  
   }
 }
