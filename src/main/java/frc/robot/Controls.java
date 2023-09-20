@@ -14,9 +14,12 @@ public class Controls {
   // R2 / Right Trigger - Shoot (Spisn flywheels + move up conveyor)  
 
   private static final PowerLevel DEFAULT_POWER_LEVEL = PowerLevel.POWER_4;
+  private static final double DEFAULT_DRIVETRAIN_POWER_PERCENTAGE = 1;
+  private static final double DEFAULT_LOW_DRIVETRAIN_POWER_PERCENTAGE = 0.3;
 
   private static PowerLevel currentLevel = DEFAULT_POWER_LEVEL;
   private static double currentLevelPercentage = getPowerLevelPercentage(currentLevel);
+  private static double drivetrainSpeedPercentage = DEFAULT_DRIVETRAIN_POWER_PERCENTAGE;
 
   private enum PowerLevel {
     POWER_1 {
@@ -71,6 +74,12 @@ public class Controls {
     currentLevel = DEFAULT_POWER_LEVEL;
     currentLevelPercentage = getPowerLevelPercentage(currentLevel);
   }
+  private static void lowDriveSpeed(){
+    drivetrainSpeedPercentage = DEFAULT_LOW_DRIVETRAIN_POWER_PERCENTAGE;
+  }
+  private static void defaultDriveSpeed(){
+    drivetrainSpeedPercentage = DEFAULT_DRIVETRAIN_POWER_PERCENTAGE;
+  }
 
   // Main Function (essentially)
   public static void controlConfig(RobotContainer bot) {
@@ -81,7 +90,7 @@ public class Controls {
         // CONTROL: Drive - Left Joystick (Y Inverted required)
         () ->
           bot.drivetrain.drive(
-            -bot.controller.leftY.getAsDouble(), bot.controller.leftX.getAsDouble())));
+            -bot.controller.leftY.getAsDouble(), bot.controller.leftX.getAsDouble(),drivetrainSpeedPercentage)));
 
     // Conveyor
     bot.controller.cross_a.whileTrue(bot.conveyor.conveyBallForward());
@@ -98,6 +107,13 @@ public class Controls {
       resetPowerLevel();
     }));
 
+    bot.controller.leftTriggerB.onFalse(Commands.runOnce(() -> {
+      defaultDriveSpeed();
+    }));
+    bot.controller.leftTriggerB.onTrue(Commands.runOnce(() -> {
+      lowDriveSpeed();
+    }));
+
     // Shoot
     bot.controller.rightTriggerB.whileTrue(Commands.parallel( // Run in parallel so shooter flywheels have time to get to full speed
       bot.shooter.shoot(currentLevelPercentage),
@@ -111,5 +127,6 @@ public class Controls {
   public static void periodic(){
     SmartDashboard.putNumber("Target Shooter Power %", currentLevelPercentage);
     SmartDashboard.putString("Shooter Level", currentLevel.toString());
+    SmartDashboard.putNumber("Drivetrain Speed %", drivetrainSpeedPercentage);
   }
 }
