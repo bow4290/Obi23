@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -46,6 +47,11 @@ public class Drivetrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Current Left Drive Motor 1 %", leftDrive1.getMotorOutputPercent());
+    SmartDashboard.putNumber("Current Left Drive Motor 2 %", leftDrive2.getMotorOutputPercent());
+    SmartDashboard.putNumber("Current Left Drive Motor 3 %", leftDrive3.getMotorOutputPercent());
+    SmartDashboard.putNumber("Current Right Drive Motor 1 %", rightDrive1.getMotorOutputPercent());
+    SmartDashboard.putNumber("Current Right Drive Motor 2 %", rightDrive2.getMotorOutputPercent());
+    SmartDashboard.putNumber("Current Right Drive Motor 3 %", rightDrive3.getMotorOutputPercent());
   }
 }

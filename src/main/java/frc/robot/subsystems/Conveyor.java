@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -38,5 +39,12 @@ public class Conveyor extends SubsystemBase {
 
   public CommandBase conveyBallBackward() {
     return conveyBall(POWER_BACKWARD);
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Current Top Conveyor Motor %", topMotor.getMotorOutputPercent());
+    SmartDashboard.putNumber(
+        "Current Bottom Conveyor Motor %", bottomMotor.getMotorOutputPercent());
   }
 }

@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,14 +21,16 @@ public class ShootyThing extends SubsystemBase {
     leftShooterMotor.set(power);
     rightShooterMotor.set(power);
   }
-  
 
   public CommandBase shoot(double power) {
     return runEnd(() -> setShooterPower(power), () -> setShooterPower(0));
-  } 
+  }
+
   @Override
-  public void periodic () {
-SmartDashboard.putNumber("left shooter motor percentage",leftShooterMotor.getMotorOutputPercent());
-SmartDashboard.putNumber("right shooter motor percentage",rightShooterMotor.getMotorOutputPercent());
+  public void periodic() {
+    SmartDashboard.putNumber(
+        "Current Left Shooter Motor %", leftShooterMotor.getMotorOutputPercent());
+    SmartDashboard.putNumber(
+        "Current Right Shooter Motor %", rightShooterMotor.getMotorOutputPercent());
   }
 }

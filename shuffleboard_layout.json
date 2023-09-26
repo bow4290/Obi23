@@ -1,0 +1,257 @@
+{
+  "tabPane": [
+    {
+      "title": "SmartDashboard",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "SmartDashboard/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {
+          "2,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Shooter",
+              "_glyph": 26,
+              "_showGlyph": true,
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Shooter Level",
+                  "_title": "Shooter Level",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Target Shooter Power %",
+                  "_title": "Target Shooter Power %",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "List Layout",
+                  "_title": "Current Shooter Percentages",
+                  "_glyph": 149,
+                  "_showGlyph": false,
+                  "Layout/Label position": "BOTTOM",
+                  "_children": [
+                    {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Left Shooter Motor %",
+                      "_title": "Current Left Shooter Motor %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    },
+                    {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Right Shooter Motor %",
+                      "_title": "Current Right Shooter Motor %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Conveyor + Intake",
+              "_glyph": 133,
+              "_showGlyph": true,
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Current Intake Motor Percent",
+                  "_title": "Current Intake Motor Percent",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "List Layout",
+                  "_title": "Current Conveyor Percentages",
+                  "_glyph": 149,
+                  "_showGlyph": false,
+                  "Layout/Label position": "BOTTOM",
+                  "_children": [
+                    {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Top Conveyor Motor %",
+                      "_title": "Current Top Conveyor Motor %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    },
+                    {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Bottom Conveyor Motor %",
+                      "_title": "Current Bottom Conveyor Motor %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "6,0": {
+            "size": [
+              3,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Drivetrain",
+              "_glyph": 530,
+              "_showGlyph": true,
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Target Drivetrain Speed %",
+                  "_title": "Target Drivetrain Speed %",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                },
+                {
+                  "_type": "Grid Layout",
+                  "_title": "Current Drivetrain Percentages",
+                  "_glyph": 149,
+                  "_showGlyph": false,
+                  "Layout/Number of columns": 2,
+                  "Layout/Number of rows": 3,
+                  "Layout/Label position": "BOTTOM",
+                  "_children": {
+                    "0,1": {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Left Drive Motor 2 %",
+                      "_title": "Current Left Drive Motor 2 %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    },
+                    "0,2": {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Left Drive Motor 3 %",
+                      "_title": "Current Left Drive Motor 3 %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    },
+                    "0,0": {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Left Drive Motor 1 %",
+                      "_title": "Current Left Drive Motor 1 %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    },
+                    "1,0": {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Right Drive Motor 1 %",
+                      "_title": "Current Right Drive Motor 1 %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    },
+                    "1,1": {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Right Drive Motor 2 %",
+                      "_title": "Current Right Drive Motor 2 %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    },
+                    "1,2": {
+                      "_type": "Text View",
+                      "_source0": "network_table:///SmartDashboard/Current Right Drive Motor 3 %",
+                      "_title": "Current Right Drive Motor 3 %",
+                      "_glyph": 148,
+                      "_showGlyph": false
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "QuickView Values",
+              "_glyph": 273,
+              "_showGlyph": true,
+              "Layout/Label position": "TOP",
+              "_children": [
+                {
+                  "_type": "Number Bar",
+                  "_source0": "network_table:///SmartDashboard/QuickView Shooter Power Level",
+                  "_title": "QuickView Shooter Power Level",
+                  "_glyph": 148,
+                  "_showGlyph": false,
+                  "Range/Min": 1.0,
+                  "Range/Max": 4.0,
+                  "Range/Center": 1.0,
+                  "Visuals/Num tick marks": 4,
+                  "Visuals/Show text": true,
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Number Bar",
+                  "_source0": "network_table:///SmartDashboard/QuickView Target Shooter %",
+                  "_title": "QuickView Target Shooter %",
+                  "_glyph": 148,
+                  "_showGlyph": false,
+                  "Range/Min": 65.0,
+                  "Range/Max": 95.0,
+                  "Range/Center": 65.0,
+                  "Visuals/Num tick marks": 4,
+                  "Visuals/Show text": true,
+                  "Visuals/Orientation": "VERTICAL"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/QuickView Target Drivetrain %",
+                  "_title": "QuickView Target Drivetrain %",
+                  "_glyph": 148,
+                  "_showGlyph": false
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "LiveWindow",
+      "autoPopulate": true,
+      "autoPopulatePrefix": "LiveWindow/",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "titleType": 0,
+        "tiles": {}
+      }
+    }
+  ],
+  "windowGeometry": {
+    "x": -8.0,
+    "y": -8.0,
+    "width": 1936.0,
+    "height": 1096.0
+  }
+}

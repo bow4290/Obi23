@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.Intake;
+
 public class Controls {
   // -- Control Scheme --
   // Left Trigger (As Button) - Aim drivetrain speed (slow drivetrain)
@@ -12,14 +13,15 @@ public class Controls {
   // ○ / B - Conveyor Back / Down
   // Dpad ↑ / ↓ - Increase / Decrease Shooter Power
   // △ / Y - Reset Shooter Power
-  // R2 / Right Trigger - Shoot (Spisn flywheels + move up conveyor)  
+  // R2 / Right Trigger - Shoot (Spisn flywheels + move up conveyor)
 
   private static final PowerLevel DEFAULT_SHOOTER_POWER_LEVEL = PowerLevel.POWER_4;
   private static final double DEFAULT_DRIVETRAIN_POWER_PERCENTAGE = 1;
   private static final double LOW_DRIVETRAIN_POWER_PERCENTAGE = 0.3;
 
   private static PowerLevel currentShooterLevel = DEFAULT_SHOOTER_POWER_LEVEL;
-  private static double currentShooterLevelPercentage = getPowerLevelPercentage(currentShooterLevel);
+  private static double currentShooterLevelPercentage =
+      getPowerLevelPercentage(currentShooterLevel);
   private static double drivetrainSpeedPercentage = DEFAULT_DRIVETRAIN_POWER_PERCENTAGE;
 
   private enum PowerLevel {
@@ -39,22 +41,23 @@ public class Controls {
     };
 
     // Don't directly call these, instead use incrementLevel() and decrementLevel()
-    PowerLevel increase(){
+    PowerLevel increase() {
       return values()[ordinal() + 1];
     }
-    PowerLevel decrease(){
+
+    PowerLevel decrease() {
       return values()[ordinal() - 1];
     }
   }
-  
+
   // Shooter power level mappings go here
-  private static double getPowerLevelPercentage(PowerLevel level){
+  private static double getPowerLevelPercentage(PowerLevel level) {
     double p1 = 0.65;
     double p2 = 0.75;
     double p3 = 0.85;
     double p4 = 0.95;
 
-    return switch (level){
+    return switch (level) {
       case POWER_1 -> p1;
       case POWER_2 -> p2;
       case POWER_3 -> p3;
@@ -62,25 +65,29 @@ public class Controls {
     };
   }
 
-  // Uses PowerLevel methods along with getPowerLevelPercentage to change currentLevel and currentLevelPercentage
+  // Uses PowerLevel methods along with getPowerLevelPercentage to change currentLevel and
+  // currentLevelPercentage
   private static void incrementPowerLevel() {
     currentShooterLevel = currentShooterLevel.increase();
     currentShooterLevelPercentage = getPowerLevelPercentage(currentShooterLevel);
   }
+
   private static void decrementPowerLevel() {
     currentShooterLevel = currentShooterLevel.decrease();
     currentShooterLevelPercentage = getPowerLevelPercentage(currentShooterLevel);
   }
-  private static void resetPowerLevel(){
+
+  private static void resetPowerLevel() {
     currentShooterLevel = DEFAULT_SHOOTER_POWER_LEVEL;
     currentShooterLevelPercentage = getPowerLevelPercentage(currentShooterLevel);
   }
 
   // helper method to change drive speeds (implemented for easier aiming)
-  private static void lowDriveSpeed(){
+  private static void lowDriveSpeed() {
     drivetrainSpeedPercentage = LOW_DRIVETRAIN_POWER_PERCENTAGE;
   }
-  private static void defaultDriveSpeed(){
+
+  private static void defaultDriveSpeed() {
     drivetrainSpeedPercentage = DEFAULT_DRIVETRAIN_POWER_PERCENTAGE;
   }
 
@@ -89,48 +96,67 @@ public class Controls {
 
     // Drive
     bot.drivetrain.setDefaultCommand(
-      bot.drivetrain.run(
-        // CONTROL: Drive - Left Joystick (Y Inverted required)
-        () ->
-          bot.drivetrain.drive(
-            -bot.controller.leftY.getAsDouble(), bot.controller.leftX.getAsDouble(), drivetrainSpeedPercentage)));
+        bot.drivetrain.run(
+            // CONTROL: Drive - Left Joystick (Y Inverted required)
+            () ->
+                bot.drivetrain.drive(
+                    -bot.controller.leftY.getAsDouble(),
+                    bot.controller.leftX.getAsDouble(),
+                    drivetrainSpeedPercentage)));
 
     // Conveyor
     bot.controller.cross_a.whileTrue(bot.conveyor.conveyBallForward());
     bot.controller.circle_b.whileTrue(bot.conveyor.conveyBallBackward());
 
     // Power Levels
-    bot.controller.dpadUp.onTrue(Commands.runOnce(() -> {
-      incrementPowerLevel();
-    }));
-    bot.controller.dpadDown.onTrue(Commands.runOnce(() -> {
-      decrementPowerLevel();
-    }));
-    bot.controller.triangle_y.onTrue(Commands.runOnce(() -> {
-      resetPowerLevel();
-    }));
+    bot.controller.dpadUp.onTrue(
+        Commands.runOnce(
+            () -> {
+              incrementPowerLevel();
+            }));
+    bot.controller.dpadDown.onTrue(
+        Commands.runOnce(
+            () -> {
+              decrementPowerLevel();
+            }));
+    bot.controller.triangle_y.onTrue(
+        Commands.runOnce(
+            () -> {
+              resetPowerLevel();
+            }));
 
     // Drivetrain aim speed buttons
-    bot.controller.leftTriggerB.onFalse(Commands.runOnce(() -> {
-      defaultDriveSpeed();
-    }));
-    bot.controller.leftTriggerB.onTrue(Commands.runOnce(() -> {
-      lowDriveSpeed();
-    }));
+    bot.controller.leftTriggerB.onFalse(
+        Commands.runOnce(
+            () -> {
+              defaultDriveSpeed();
+            }));
+    bot.controller.leftTriggerB.onTrue(
+        Commands.runOnce(
+            () -> {
+              lowDriveSpeed();
+            }));
 
     // Shoot
-    bot.controller.rightTriggerB.whileTrue(Commands.parallel( // Run in parallel so shooter flywheels have time to get to full speed
-      bot.shooter.shoot(currentShooterLevelPercentage),
-      bot.conveyor.conveyBallForward().beforeStarting(Commands.waitSeconds(1))
-    ));
+    bot.controller.rightTriggerB.whileTrue(
+        Commands.parallel( // Run in parallel so shooter flywheels have time to get to full speed
+            bot.shooter.shoot(currentShooterLevelPercentage),
+            bot.conveyor.conveyBallForward().beforeStarting(Commands.waitSeconds(1))));
 
     // Intake
     bot.controller.square_x.whileTrue(bot.intake.runIntake(Intake.INTAKE_POWER));
   }
 
-  public static void periodic(){
+  public static void periodic() {
     SmartDashboard.putNumber("Target Shooter Power %", currentShooterLevelPercentage);
     SmartDashboard.putString("Shooter Level", currentShooterLevel.toString());
     SmartDashboard.putNumber("Target Drivetrain Speed %", drivetrainSpeedPercentage);
+
+    // Get Shooter Power Level in ordinal, add 1 since it starts at 0.
+    SmartDashboard.putNumber("QuickView Shooter Power Level", currentShooterLevel.ordinal() + 1);
+
+    // Multiplied by 100 to get a number between 0-100
+    SmartDashboard.putNumber("QuickView Target Shooter %", currentShooterLevelPercentage * 100);
+    SmartDashboard.putNumber("QuickView Target Drivetrain %", drivetrainSpeedPercentage * 100);
   }
 }
