@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   // - Constants -
-  public static final int INTAKE_ID = 13;
+  public static final int INTAKE_ID = 4;
   public static final double INTAKE_POWER = 1.00;
 
   private final WPI_VictorSPX intake = new WPI_VictorSPX(INTAKE_ID);

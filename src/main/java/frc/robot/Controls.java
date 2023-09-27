@@ -100,8 +100,8 @@ public class Controls {
             // CONTROL: Drive - Left Joystick (Y Inverted required)
             () ->
                 bot.drivetrain.drive(
-                    -bot.controller.leftY.getAsDouble(),
-                    bot.controller.leftX.getAsDouble(),
+                    -bot.controller.leftX.getAsDouble(),
+                    bot.controller.leftY.getAsDouble(),
                     drivetrainSpeedPercentage)));
 
     // Conveyor
