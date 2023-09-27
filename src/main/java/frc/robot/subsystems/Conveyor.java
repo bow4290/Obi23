@@ -21,6 +21,7 @@ public class Conveyor extends SubsystemBase {
 
   public Conveyor() {
     topMotor.setInverted(true);
+    bottomMotor.setInverted(true);
     triggers.whileTrue(conveyBallForward());
   }
 
