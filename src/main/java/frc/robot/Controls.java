@@ -17,7 +17,7 @@ public class Controls {
 
   private static final PowerLevel DEFAULT_SHOOTER_POWER_LEVEL = PowerLevel.POWER_4;
   private static final double DEFAULT_DRIVETRAIN_POWER_PERCENTAGE = 1;
-  private static final double LOW_DRIVETRAIN_POWER_PERCENTAGE = 0.3;
+  private static final double LOW_DRIVETRAIN_POWER_PERCENTAGE = 0.5;
 
   private static PowerLevel currentShooterLevel = DEFAULT_SHOOTER_POWER_LEVEL;
   private static double currentShooterLevelPercentage =
@@ -100,7 +100,7 @@ public class Controls {
             // CONTROL: Drive - Left Joystick (Y Inverted required)
             () ->
                 bot.drivetrain.drive(
-                    -bot.controller.leftX.getAsDouble(),
+                    bot.controller.leftX.getAsDouble(),
                     bot.controller.leftY.getAsDouble(),
                     drivetrainSpeedPercentage)));
 
@@ -141,7 +141,7 @@ public class Controls {
     bot.controller.rightTriggerB.whileTrue(
         Commands.parallel( // Run in parallel so shooter flywheels have time to get to full speed
             bot.shooter.shoot(currentShooterLevelPercentage),
-            bot.conveyor.conveyBallForward().beforeStarting(Commands.waitSeconds(1))));
+            bot.conveyor.conveyBallForward().beforeStarting(Commands.waitSeconds(0.75))));
 
     // Intake
     bot.controller.square_x.whileTrue(bot.intake.runIntake(Intake.INTAKE_POWER));
