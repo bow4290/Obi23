@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShootyThing extends SubsystemBase {
@@ -22,7 +22,7 @@ public class ShootyThing extends SubsystemBase {
     rightShooterMotor.set(power);
   }
 
-  public CommandBase shoot(double power) {
+  public Command shoot(double power) {
     return runEnd(() -> setShooterPower(power), () -> setShooterPower(0));
   }
 

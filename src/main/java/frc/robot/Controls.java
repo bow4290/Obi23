@@ -16,16 +16,13 @@ public class Controls {
   // R2 / Right Trigger - Shoot (Spisn flywheels + move up conveyor)
 
   private static final PowerLevel DEFAULT_SHOOTER_POWER_LEVEL = PowerLevel.POWER_4;
-  private static final double DEFAULT_DRIVETRAIN_DRIVESPEED_PERCENTAGE = 1;
-  private static final double DEFAULT_DRIVETRAIN_ROTATESPEED_PERCENTAGE = 1;
-  private static final double LOW_DRIVETRAIN_DRIVESPEED_PERCENTAGE = 0.35;
-  private static final double LOW_DRIVETRAIN_ROTATESPEED_PERCENTAGE = 0.8;
+  private static final double DEFAULT_DRIVETRAIN_POWER_PERCENTAGE = 1;
+  private static final double LOW_DRIVETRAIN_POWER_PERCENTAGE = 0.5;
 
   private static PowerLevel currentShooterLevel = DEFAULT_SHOOTER_POWER_LEVEL;
   private static double currentShooterLevelPercentage =
       getPowerLevelPercentage(currentShooterLevel);
-  private static double drivetrainDriveSpeedPercentage = DEFAULT_DRIVETRAIN_DRIVESPEED_PERCENTAGE;
-  private static double drivetrainRotateSpeedPercentage = DEFAULT_DRIVETRAIN_ROTATESPEED_PERCENTAGE;
+  private static double drivetrainSpeedPercentage = DEFAULT_DRIVETRAIN_POWER_PERCENTAGE;
 
   private enum PowerLevel {
     POWER_1 {
@@ -87,13 +84,11 @@ public class Controls {
 
   // helper method to change drive speeds (implemented for easier aiming)
   private static void lowDriveSpeed() {
-    drivetrainDriveSpeedPercentage = LOW_DRIVETRAIN_DRIVESPEED_PERCENTAGE;
-    drivetrainRotateSpeedPercentage = LOW_DRIVETRAIN_ROTATESPEED_PERCENTAGE;
+    drivetrainSpeedPercentage = LOW_DRIVETRAIN_POWER_PERCENTAGE;
   }
 
   private static void defaultDriveSpeed() {
-    drivetrainDriveSpeedPercentage = DEFAULT_DRIVETRAIN_DRIVESPEED_PERCENTAGE;
-    drivetrainRotateSpeedPercentage = DEFAULT_DRIVETRAIN_ROTATESPEED_PERCENTAGE;
+    drivetrainSpeedPercentage = DEFAULT_DRIVETRAIN_POWER_PERCENTAGE;
   }
 
   // Main Function (essentially)
@@ -107,8 +102,7 @@ public class Controls {
                 bot.drivetrain.drive(
                     bot.controller.leftX.getAsDouble(),
                     bot.controller.leftY.getAsDouble(),
-                    drivetrainDriveSpeedPercentage,
-                    drivetrainRotateSpeedPercentage)));
+                    drivetrainSpeedPercentage)));
 
     // Conveyor
     bot.controller.cross_a.whileTrue(bot.conveyor.conveyBallForward());
@@ -156,13 +150,13 @@ public class Controls {
   public static void periodic() {
     SmartDashboard.putNumber("Target Shooter Power %", currentShooterLevelPercentage);
     SmartDashboard.putString("Shooter Level", currentShooterLevel.toString());
-    SmartDashboard.putNumber("Target Drivetrain Speed %", drivetrainDriveSpeedPercentage);
-    SmartDashboard.putNumber("Target Drivetrain Speed %", drivetrainRotateSpeedPercentage);
+    SmartDashboard.putNumber("Target Drivetrain Speed %", drivetrainSpeedPercentage);
 
     // Get Shooter Power Level in ordinal, add 1 since it starts at 0.
     SmartDashboard.putNumber("QuickView Shooter Power Level", currentShooterLevel.ordinal() + 1);
 
     // Multiplied by 100 to get a number between 0-100
     SmartDashboard.putNumber("QuickView Target Shooter %", currentShooterLevelPercentage * 100);
+    SmartDashboard.putNumber("QuickView Target Drivetrain %", drivetrainSpeedPercentage * 100);
   }
 }
