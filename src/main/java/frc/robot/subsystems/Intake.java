@@ -2,7 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
@@ -16,7 +16,7 @@ public class Intake extends SubsystemBase {
     intake.setInverted(false);
   }
 
-  public CommandBase runIntake(double power) {
+  public Command runIntake(double power) {
     return runEnd(() -> intake.set(power), () -> intake.set(0));
   }
 

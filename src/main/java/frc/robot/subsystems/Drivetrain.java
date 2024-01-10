@@ -4,9 +4,10 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -29,20 +30,21 @@ public class Drivetrain extends SubsystemBase {
     leftDrive2 = new WPI_VictorSPX(ID_LEFT_DRIVE_2);
     leftDrive3 = new WPI_VictorSPX(ID_LEFT_DRIVE_3);
 
-    MotorControllerGroup leftDriveGroup =
-        new MotorControllerGroup(leftDrive1, leftDrive2, leftDrive3);
-    MotorControllerGroup rightDriveGroup =
-        new MotorControllerGroup(rightDrive1, rightDrive2, rightDrive3);
-
     // fun wiring stuff
-    leftDriveGroup.setInverted(true);
-    rightDriveGroup.setInverted(true);
+    leftDrive1.setInverted(true);
+    rightDrive1.setInverted(true);
 
-    differentialDrive = new DifferentialDrive(leftDriveGroup, rightDriveGroup);
+    differentialDrive = new DifferentialDrive(leftDrive1, rightDrive1);
   }
 
-  public void drive(double move, double rotation, double driveSpeed, double rotationSpeed) {
-    differentialDrive.arcadeDrive(move * driveSpeed, rotation * rotationSpeed);
+  public void drive(double move, double rotation, double speed) {
+    differentialDrive.arcadeDrive(move * speed, rotation * speed);
+
+    // Sets all other motors to follow the 1st motor for each side. Roughly equivalent to a motor controller group, as those are now deprecated.
+    leftDrive2.set(VictorSPXControlMode.Follower, ID_LEFT_DRIVE_1);
+    leftDrive3.set(VictorSPXControlMode.Follower, ID_LEFT_DRIVE_1);
+    rightDrive2.set(VictorSPXControlMode.Follower, ID_RIGHT_DRIVE_1);
+    rightDrive3.set(VictorSPXControlMode.Follower, ID_RIGHT_DRIVE_1);
   }
 
   @Override

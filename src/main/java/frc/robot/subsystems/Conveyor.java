@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -21,7 +21,6 @@ public class Conveyor extends SubsystemBase {
 
   public Conveyor() {
     topMotor.setInverted(true);
-    bottomMotor.setInverted(true);
     triggers.whileTrue(conveyBallForward());
   }
 
@@ -30,15 +29,15 @@ public class Conveyor extends SubsystemBase {
     bottomMotor.set(power);
   }
 
-  public CommandBase conveyBall(double power) {
+  public Command conveyBall(double power) {
     return runEnd(() -> setMotorPower(power), () -> setMotorPower(0));
   }
 
-  public CommandBase conveyBallForward() {
+  public Command conveyBallForward() {
     return conveyBall(POWER_FORWARD);
   }
 
-  public CommandBase conveyBallBackward() {
+  public Command conveyBallBackward() {
     return conveyBall(POWER_BACKWARD);
   }
 
